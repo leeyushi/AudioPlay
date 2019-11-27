@@ -72,7 +72,7 @@ public class PlayDetailActivity extends AppCompatActivity {
                 case PlaybackStage.NONE:
                     title.setText("播放详情页示例");
                     break;
-                case PlaybackStage.START: 
+                case PlaybackStage.START:
                     mListPlayAdapter.notifyDataSetChanged();
                     mTimerTask.startToUpdateProgress();
                     break;
