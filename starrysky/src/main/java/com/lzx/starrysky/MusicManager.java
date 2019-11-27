@@ -4,11 +4,9 @@ package com.lzx.starrysky;
 import android.content.Context;
 
 import com.lzx.starrysky.control.OnPlayerEventListener;
-import com.lzx.starrysky.provider.SongInfo;
 import com.lzx.starrysky.notification.NotificationConfig;
 
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * 用户操作管理类
