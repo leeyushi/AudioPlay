@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.lzx.starrysky.control.OnPlayerEventListener;
 import com.lzx.starrysky.notification.NotificationConfig;
+import com.lzx.starrysky.provider.SongInfo;
 
 import java.util.List;
 

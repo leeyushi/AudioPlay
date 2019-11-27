@@ -1,5 +1,6 @@
 package com.lzx.starrysky.registry;
 
+import com.lzx.starrysky.provider.SongInfo;
 import com.lzx.starrysky.utils.StarrySkyUtils;
 import com.lzx.starrysky.delayaction.Valid;
 
