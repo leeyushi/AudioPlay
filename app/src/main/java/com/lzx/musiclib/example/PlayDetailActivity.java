@@ -57,7 +57,8 @@ public class PlayDetailActivity extends AppCompatActivity {
         findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StarrySky.with().onDerailleur(false, 2.5f);
+                mTimerTask.setUpdateSpeed(2.5f);
+                StarrySky.with().onDerailleur(false, 0.5f);
             }
         });
 
