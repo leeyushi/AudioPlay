@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
  */
 
 @Parcelize
-public class SongInfo(
+open class SongInfo(
         var songId: String = "", //音乐id
         var songName: String = "",  //音乐标题
         var songCover: String = "",  //音乐封面
