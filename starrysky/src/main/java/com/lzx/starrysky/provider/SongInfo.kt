@@ -9,49 +9,49 @@ import kotlinx.android.parcel.Parcelize
  */
 
 @Parcelize
-class SongInfo(
-    var songId: String = "", //音乐id
-    var songName: String = "",  //音乐标题
-    var songCover: String = "",  //音乐封面
-    var songHDCover: String = "",  //专辑封面(高清)
-    var songSquareCover: String = "",  //专辑封面(正方形)
-    var songRectCover: String = "",  //专辑封面(矩形)
-    var songRoundCover: String = "",  //专辑封面(圆形)
-    var songNameKey: String = "",
-    var songCoverBitmap: Bitmap? = null,
-    var songUrl: String = "",  //音乐播放地址
-    var genre: String = "",  //类型（流派）
-    var type: String = "",  //类型
-    var size: String = "", //音乐大小
-    var duration: Long = -1, //音乐长度
-    var artist: String = "",  //音乐艺术家
-    var artistKey: String = "",
-    var artistId: String = "",  //音乐艺术家id
-    var downloadUrl: String = "",  //音乐下载地址
-    var site: String = "",  //地点
-    var favorites: Int = 0, //喜欢数
-    var playCount: Int = 0, //播放数
-    var trackNumber: Int = 0, //媒体的曲目号码（序号：1234567……）
-    var language: String = "", //语言
-    var country: String = "",  //地区
-    var proxyCompany: String = "", //代理公司
-    var publishTime: String = "", //发布时间
-    var year: String = "",  //录制音频文件的年份
-    var modifiedTime: String = "",  //最后修改时间
-    var description: String = "",  //音乐描述
-    var versions: String = "",  //版本
-    var mimeType: String = "",
-    var albumId: String = "",     //专辑id
-    var albumName: String = "",   //专辑名称
-    var albumNameKey: String = "",
-    var albumCover: String = "",  //专辑封面
-    var albumHDCover: String = "",  //专辑封面(高清)
-    var albumSquareCover: String = "",  //专辑封面(正方形)
-    var albumRectCover: String = "",  //专辑封面(矩形)
-    var albumRoundCover: String = "",  //专辑封面(圆形)
-    var albumArtist: String = "",      //专辑艺术家
-    var albumSongCount: Int = 0,     //专辑音乐数
-    var albumPlayCount: Int = 0    //专辑播放数
+public class SongInfo(
+        var songId: String = "", //音乐id
+        var songName: String = "",  //音乐标题
+        var songCover: String = "",  //音乐封面
+        var songHDCover: String = "",  //专辑封面(高清)
+        var songSquareCover: String = "",  //专辑封面(正方形)
+        var songRectCover: String = "",  //专辑封面(矩形)
+        var songRoundCover: String = "",  //专辑封面(圆形)
+        var songNameKey: String = "",
+        var songCoverBitmap: Bitmap? = null,
+        var songUrl: String = "",  //音乐播放地址
+        var genre: String = "",  //类型（流派）
+        var type: String = "",  //类型
+        var size: String = "", //音乐大小
+        var duration: Long = -1, //音乐长度
+        var artist: String = "",  //音乐艺术家
+        var artistKey: String = "",
+        var artistId: String = "",  //音乐艺术家id
+        var downloadUrl: String = "",  //音乐下载地址
+        var site: String = "",  //地点
+        var favorites: Int = 0, //喜欢数
+        var playCount: Int = 0, //播放数
+        var trackNumber: Int = 0, //媒体的曲目号码（序号：1234567……）
+        var language: String = "", //语言
+        var country: String = "",  //地区
+        var proxyCompany: String = "", //代理公司
+        var publishTime: String = "", //发布时间
+        var year: String = "",  //录制音频文件的年份
+        var modifiedTime: String = "",  //最后修改时间
+        var description: String = "",  //音乐描述
+        var versions: String = "",  //版本
+        var mimeType: String = "",
+        var albumId: String = "",     //专辑id
+        var albumName: String = "",   //专辑名称
+        var albumNameKey: String = "",
+        var albumCover: String = "",  //专辑封面
+        var albumHDCover: String = "",  //专辑封面(高清)
+        var albumSquareCover: String = "",  //专辑封面(正方形)
+        var albumRectCover: String = "",  //专辑封面(矩形)
+        var albumRoundCover: String = "",  //专辑封面(圆形)
+        var albumArtist: String = "",      //专辑艺术家
+        var albumSongCount: Int = 0,     //专辑音乐数
+        var albumPlayCount: Int = 0    //专辑播放数
 ) : Parcelable {
 
 
