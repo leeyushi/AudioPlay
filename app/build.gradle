@@ -3,7 +3,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.lzx.starrysky"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -39,7 +39,6 @@ android {
         implementation("com.squareup.okhttp3:okhttp:4.1.0")
         implementation 'com.qw:soulpermission:1.2.1'
         implementation project(':starrysky')
-
         debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
     }
 }

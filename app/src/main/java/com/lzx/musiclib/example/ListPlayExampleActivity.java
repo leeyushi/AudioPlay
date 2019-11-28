@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.lzx.musiclib.R;
 import com.lzx.starrysky.StarrySky;
 import com.lzx.starrysky.common.PlaybackStage;
+import com.lzx.starrysky.provider.SongInfo;
 import com.lzx.starrysky.utils.TimerTaskManager;
 
 public class ListPlayExampleActivity extends AppCompatActivity {

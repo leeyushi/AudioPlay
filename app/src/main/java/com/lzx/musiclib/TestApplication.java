@@ -15,6 +15,7 @@ import com.lzx.starrysky.StarrySky;
 import com.lzx.starrysky.StarrySkyBuilder;
 import com.lzx.starrysky.StarrySkyConfig;
 import com.lzx.starrysky.delayaction.Valid;
+import com.lzx.starrysky.provider.SongInfo;
 import com.lzx.starrysky.registry.StarrySkyRegistry;
 import com.lzx.starrysky.utils.StarrySkyUtils;
 import com.qw.soul.permission.SoulPermission;

@@ -14,6 +14,7 @@ import com.lzx.musiclib.R;
 import com.lzx.starrysky.StarrySky;
 import com.lzx.starrysky.StarrySkyConfig;
 import com.lzx.starrysky.delayaction.Valid;
+import com.lzx.starrysky.provider.SongInfo;
 import com.lzx.starrysky.registry.StarrySkyRegistry;
 
 /**

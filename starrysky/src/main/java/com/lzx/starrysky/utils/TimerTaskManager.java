@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class TimerTaskManager {
     //更新进度条的回调速度
-    private long mProgressUpdateInternal = 1000;
+    private long mProgressUpdateInternal = 500;
     private static final long PROGRESS_UPDATE_INITIAL_INTERVAL = 100;
     private final Handler mHandler = new Handler();
     private Handler mTimerHandler;
