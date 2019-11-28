@@ -15,7 +15,7 @@ import com.lzx.starrysky.utils.StarrySkyUtils
 import java.util.Arrays
 
 open class MediaQueueManager(provider: MediaQueueProvider) : MediaQueueProviderSurface(provider),
-    MediaQueue {
+        MediaQueue {
 
 
     private var mMediaResource: MediaResource? = null
@@ -44,15 +44,16 @@ open class MediaQueueManager(provider: MediaQueueProvider) : MediaQueueProviderS
 
     override fun skipQueuePosition(amount: Int): Boolean {
         val mPlayingQueue = getMediaList()
-        if (mPlayingQueue.size == 0) {
+        var index = mCurrentIndex + amount
+        if (mPlayingQueue.size == 0 || index >= mPlayingQueue.size || index < 0) {
             return false
         }
-        var index = mCurrentIndex + amount
-        if (index < 0) {
-            index = 0
-        } else {
-            index %= mPlayingQueue.size
-        }
+//        if (index < 0) {
+//            index = 0
+//        } else {
+//            index %= mPlayingQueue.size
+//        }
+        index %= mPlayingQueue.size
         if (!QueueHelper.isIndexPlayable(index, mPlayingQueue)) {
             return false
         }
@@ -110,7 +111,7 @@ open class MediaQueueManager(provider: MediaQueueProvider) : MediaQueueProviderS
             "songInfo is null or song Id is Empty"
         }
         val mediaInfo = getMediaInfo(songInfo.songId)
-            ?: throw NullPointerException("can find mediaInfo by songId:" + songInfo.songId)
+                ?: throw NullPointerException("can find mediaInfo by songId:" + songInfo.songId)
 
         if (mediaInfo.mediaUrl != songInfo.songUrl) {
             mediaInfo.mediaUrl = songInfo.songUrl
@@ -139,7 +140,7 @@ open class MediaQueueManager(provider: MediaQueueProvider) : MediaQueueProviderS
             return
         }
         val metadata = getMediaMetadataCompatById(musicId)
-            ?: throw IllegalArgumentException("Invalid musicId $musicId")
+                ?: throw IllegalArgumentException("Invalid musicId $musicId")
 
         mUpdateListener?.onMetadataChanged(metadata)
 
@@ -172,7 +173,7 @@ open class MediaQueueManager(provider: MediaQueueProvider) : MediaQueueProviderS
         mediaInfos.shuffle()
         //打乱顺序要在这个前面
         backupMediaList = Arrays.asList(
-            *backupArray) /*backupArray.toMutableList() as MutableList<BaseMediaInfo>*/
+                *backupArray) /*backupArray.toMutableList() as MutableList<BaseMediaInfo>*/
     }
 
     override fun setNormalMode(mediaId: String) {
