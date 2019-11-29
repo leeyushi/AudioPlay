@@ -191,7 +191,7 @@ public class StarrySky {
         return mediaQueueProvider;
     }
 
-   public   IPlaybackManager getPlaybackManager() {
+    public IPlaybackManager getPlaybackManager() {
         return playbackManager;
     }
 

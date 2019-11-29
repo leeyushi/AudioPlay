@@ -22,6 +22,8 @@ interface IPlaybackManager {
 
     fun setPlayStatusChanged(playStatusChanged: PlaybackManager.PlayStatusChanged)
 
+    fun getPlayStatusChanged(): PlaybackManager.PlayStatusChanged?
+
     /**
      * 是否存在上一首
      */

@@ -86,12 +86,14 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
 
     override fun playMusic(songInfos: List<SongInfo>, index: Int) {
         StarrySky.get().getPlaybackManager().setPlaying(true)
+        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
         mMediaQueueProvider.updateMediaListBySongInfo(songInfos)
         playMusicByIndex(index)
     }
 
     private fun playMusicImpl(mediaId: String) {
         StarrySky.get().getPlaybackManager().setPlaying(true)
+        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
         StarrySky.get().getPlaybackManager().setPlayIndex(mMediaQueueProvider.getIndexByMediaId(mediaId))
         connection.getTransportControls()?.playFromMediaId(mediaId, null)
     }
@@ -103,6 +105,7 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
 
     override fun playMusic() {
         StarrySky.get().getPlaybackManager().setPlaying(true)
+        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
         connection.getTransportControls()?.play()
     }
 
@@ -122,10 +125,12 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
     }
 
     override fun skipToNext() {
+        StarrySky.get().getPlaybackManager().setPlaying(true)
         connection.getTransportControls()?.skipToNext()
     }
 
     override fun skipToPrevious() {
+        StarrySky.get().getPlaybackManager().setPlaying(true)
         connection.getTransportControls()?.skipToPrevious()
     }
 

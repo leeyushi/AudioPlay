@@ -41,7 +41,7 @@ class PlaybackManager constructor(
         fun onStatusChanged(state: Int)
 
         /**
-         * 当前歌曲自然播放完成（切换歌曲时不会调用）
+         * 当前歌曲自然播放完成（切歌导致的完成也会调用）
          */
         fun onPlayDone()
 
@@ -49,10 +49,19 @@ class PlaybackManager constructor(
          * 当前歌曲列表播放完毕（如果播放模式为列表循环、单曲循环不会调用，非循环模式切歌导致的结束则会调用）
          */
         fun onPlayEnd()
+
+        /**
+         * 开始新的播放
+         */
+        fun onNewPlay()
     }
 
     override fun setPlayStatusChanged(playStatusChanged: PlayStatusChanged) {
         mPlayStatusChanged = playStatusChanged;
+    }
+
+    override fun getPlayStatusChanged(): PlayStatusChanged? {
+        return mPlayStatusChanged
     }
 
     override fun isExistLast(): Boolean {
@@ -243,7 +252,7 @@ class PlaybackManager constructor(
     }
 
     override fun onCompletion() {
-        mPlayStatusChanged?.onPlayDone();
+        mPlayStatusChanged?.onPlayDone()
         updatePlaybackState(false, null)
         setSinglePlay()
         setSequencePlay()
@@ -377,6 +386,7 @@ class PlaybackManager constructor(
             super.onSkipToNext()
             if (setSinglePlay()) return
             if (mediaQueue.skipQueueNext(currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL)) {
+                mPlayStatusChanged?.onPlayDone()
                 handlePlayRequest(true)
                 mediaQueue.updateMetadata()
             } else {
@@ -389,6 +399,7 @@ class PlaybackManager constructor(
             super.onSkipToPrevious()
             if (setSinglePlay()) return
             if (mediaQueue.skipQueueLast(currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL)) {
+                mPlayStatusChanged?.onPlayDone()
                 handlePlayRequest(true)
                 mediaQueue.updateMetadata()
             } else {
