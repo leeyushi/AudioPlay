@@ -37,6 +37,11 @@ class PlaybackManager constructor(
          * 状态回调
          */
         fun onStatusChanged(state: Int)
+
+        /**
+         * 播放完成
+         */
+        fun onPlayDone()
     }
 
     override fun setPlayStatusChanged(playStatusChanged: PlayStatusChanged) {
@@ -211,6 +216,7 @@ class PlaybackManager constructor(
     }
 
     override fun onCompletion() {
+        mPlayStatusChanged?.onPlayDone();
         updatePlaybackState(false, null)
         //单曲模式(播放当前就结束)
         if (currRepeatMode == SINGLE_MODE_ONE) {
