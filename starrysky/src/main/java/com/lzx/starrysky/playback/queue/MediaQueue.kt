@@ -50,6 +50,12 @@ interface MediaQueue {
      */
     fun isExistNext(): Boolean
 
+
+    /**
+     * 获取当前播放的索引
+     */
+    fun getPlayIndex(): Int
+
     /**
      * 获取当前播放的媒体
      */

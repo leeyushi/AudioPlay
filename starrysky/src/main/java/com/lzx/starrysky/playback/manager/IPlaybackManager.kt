@@ -33,6 +33,11 @@ interface IPlaybackManager {
     fun isExistNext(): Boolean
 
     /**
+     * 获取当前播放的索引
+     */
+    fun getPlayIndex(): Int
+
+    /**
      * 播放
      */
     fun handlePlayRequest(isPlayWhenReady: Boolean)

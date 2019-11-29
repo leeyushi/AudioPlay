@@ -22,7 +22,6 @@ class PlaybackManager constructor(
 ) : IPlaybackManager,
         Playback.Callback {
 
-
     private var mServiceCallback: IPlaybackManager.PlaybackServiceCallback? = null
     private val mMediaSessionCallback: MediaSessionCallback
     private var notification: INotification? = null
@@ -55,6 +54,10 @@ class PlaybackManager constructor(
 
     override fun isExistNext(): Boolean {
         return mediaQueue.isExistNext()
+    }
+
+    override fun getPlayIndex(): Int {
+        return mediaQueue.getPlayIndex()
     }
 
     init {

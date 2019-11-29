@@ -80,6 +80,10 @@ open class MediaQueueManager(provider: MediaQueueProvider) : MediaQueueProviderS
         return mCurrentIndex - 1 != -1
     }
 
+    override fun getPlayIndex(): Int {
+        return mCurrentIndex
+    }
+
     override fun getCurrentMusic(): MediaResource? {
         return getCurrentMusic(null)
     }
