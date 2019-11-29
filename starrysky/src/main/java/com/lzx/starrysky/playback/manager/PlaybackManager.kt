@@ -39,9 +39,14 @@ class PlaybackManager constructor(
         fun onStatusChanged(state: Int)
 
         /**
-         * 播放完成
+         * 当前歌曲自然播放完成（切换歌曲时不会调用）
          */
         fun onPlayDone()
+
+        /**
+         * 当前歌曲列表播放完毕（如果播放模式为列表循环、单曲循环不会调用，非循环模式切歌导致的结束则会调用）
+         */
+        fun onPlayEnd()
     }
 
     override fun setPlayStatusChanged(playStatusChanged: PlayStatusChanged) {
@@ -233,6 +238,7 @@ class PlaybackManager constructor(
         //单曲模式(播放当前就结束)
         if (currRepeatMode == SINGLE_MODE_ONE) {
             playback.currentMediaId = ""
+            mPlayStatusChanged?.onPlayEnd()
             return
         }
         if (currRepeatMode == PlaybackStateCompat.REPEAT_MODE_NONE) {
@@ -242,6 +248,7 @@ class PlaybackManager constructor(
                 mediaQueue.updateMetadata()
             } else {
                 handleStopRequest(null)
+                mPlayStatusChanged?.onPlayEnd()
             }
         } else if (currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ONE) {
             //单曲循环
@@ -329,6 +336,7 @@ class PlaybackManager constructor(
                 mediaQueue.updateMetadata()
             } else {
                 handleStopRequest(null)
+                mPlayStatusChanged?.onPlayEnd()
             }
         }
 
@@ -339,6 +347,7 @@ class PlaybackManager constructor(
                 mediaQueue.updateMetadata()
             } else {
                 handleStopRequest(null)
+                mPlayStatusChanged?.onPlayEnd()
             }
         }
 
