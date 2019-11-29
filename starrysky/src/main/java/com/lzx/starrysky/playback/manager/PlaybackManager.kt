@@ -18,9 +18,9 @@ import com.lzx.starrysky.provider.SongInfo
 import com.lzx.starrysky.registry.ValidRegistry
 
 class PlaybackManager constructor(
-    private val mediaQueue: MediaQueue, private val playback: Playback
+        private val mediaQueue: MediaQueue, private val playback: Playback
 ) : IPlaybackManager,
-    Playback.Callback {
+        Playback.Callback {
 
     private var mServiceCallback: IPlaybackManager.PlaybackServiceCallback? = null
     private val mMediaSessionCallback: MediaSessionCallback
@@ -30,6 +30,18 @@ class PlaybackManager constructor(
     private val shouldPlayPre = true  //是否可以播放上一首
     private var stateBuilder: PlaybackStateCompat.Builder? = null
     private val mHandler = Handler(Looper.getMainLooper())
+    private var mPlayStatusChanged: PlayStatusChanged? = null;
+
+    public interface PlayStatusChanged {
+        /**
+         * 状态回调
+         */
+        fun onStatusChanged(state: Int)
+    }
+
+    override fun setPlayStatusChanged(playStatusChanged: PlayStatusChanged) {
+        mPlayStatusChanged = playStatusChanged;
+    }
 
     init {
         mMediaSessionCallback = MediaSessionCallback()
@@ -128,7 +140,7 @@ class PlaybackManager constructor(
             }
             //构建一个播放状态对象
             stateBuilder = PlaybackStateCompat.Builder()
-                .setActions(getAvailableActions())
+                    .setActions(getAvailableActions())
             //获取播放器播放状态
             var state = playback.state
             //如果错误信息不为 null 的时候，播放状态设为 STATE_ERROR
@@ -145,7 +157,7 @@ class PlaybackManager constructor(
                 stateBuilder!!.setActiveQueueItemId(currentMusic.getQueueId())
                 val musicId = currentMusic.getMediaId()
                 currMetadata =
-                    StarrySky.get().mediaQueueProvider.getMediaMetadataCompatById(musicId)
+                        StarrySky.get().mediaQueueProvider.getMediaMetadataCompatById(musicId)
             }
             //把状态回调出去
             mServiceCallback?.onPlaybackStateUpdated(stateBuilder!!.build(), currMetadata)
@@ -161,10 +173,10 @@ class PlaybackManager constructor(
      */
     private fun getAvailableActions(): Long {
         var actions = PlaybackStateCompat.ACTION_PLAY_PAUSE or
-            PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID or
-            PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH or
-            PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
-            PlaybackStateCompat.ACTION_SKIP_TO_NEXT
+                PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID or
+                PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH or
+                PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
+                PlaybackStateCompat.ACTION_SKIP_TO_NEXT
         actions = if (playback.isPlaying) {
             actions or PlaybackStateCompat.ACTION_PAUSE //添加 ACTION_PAUSE
         } else {
@@ -229,6 +241,7 @@ class PlaybackManager constructor(
     }
 
     override fun onPlaybackStatusChanged(state: Int) {
+        mPlayStatusChanged?.onStatusChanged(state)
         updatePlaybackState(false, null)
     }
 

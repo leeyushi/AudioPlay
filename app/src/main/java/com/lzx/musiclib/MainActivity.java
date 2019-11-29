@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.lzx.musiclib.example.ListPlayExampleActivity;
 import com.lzx.musiclib.example.PlayDetailActivity;
 import com.lzx.musiclib.example.RequestBeforePlayActivity;
+import com.lzx.starrysky.StarrySky;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn1).setOnClickListener(v -> startListPlayExampleActivity());
         findViewById(R.id.btn2).setOnClickListener(v -> startRequestBeforePlayActivity());
         findViewById(R.id.btn3).setOnClickListener(v -> startPlayDetailActivity());
+        StarrySky.get().getPlaybackManager().setPlayStatusChanged(state -> {
 
+        });
     }
 
     public void startListPlayExampleActivity() {

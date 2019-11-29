@@ -20,6 +20,8 @@ interface IPlaybackManager {
 
     fun setMetadataUpdateListener(listener: MediaQueueProvider.MetadataUpdateListener)
 
+    fun setPlayStatusChanged(playStatusChanged: PlaybackManager.PlayStatusChanged)
+
     /**
      * 播放
      */
