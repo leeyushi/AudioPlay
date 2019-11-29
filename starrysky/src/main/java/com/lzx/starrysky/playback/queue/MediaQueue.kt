@@ -29,12 +29,26 @@ interface MediaQueue {
      */
     fun isSameMedia(mediaId: String): Boolean
 
+
     /**
-     * 转跳下一首或上一首
-     *
-     * @param amount 正为下一首，负为上一首
+     * 播放下一首
      */
-    fun skipQueuePosition(amount: Int): Boolean
+    fun skipQueueNext(cycle: Boolean): Boolean
+
+    /**
+     * 播放上一首
+     */
+    fun skipQueueLast(cycle: Boolean): Boolean
+
+    /**
+     * 是否存在上一首
+     */
+    fun isExistLast(): Boolean
+
+    /**
+     * 是否存在下一首
+     */
+    fun isExistNext(): Boolean
 
     /**
      * 获取当前播放的媒体

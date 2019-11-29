@@ -23,6 +23,16 @@ interface IPlaybackManager {
     fun setPlayStatusChanged(playStatusChanged: PlaybackManager.PlayStatusChanged)
 
     /**
+     * 是否存在上一首
+     */
+    fun isExistLast(): Boolean
+
+    /**
+     * 是否存在下一首
+     */
+    fun isExistNext(): Boolean
+
+    /**
      * 播放
      */
     fun handlePlayRequest(isPlayWhenReady: Boolean)

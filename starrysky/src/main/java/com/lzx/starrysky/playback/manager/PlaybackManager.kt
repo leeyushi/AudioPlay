@@ -22,6 +22,7 @@ class PlaybackManager constructor(
 ) : IPlaybackManager,
         Playback.Callback {
 
+
     private var mServiceCallback: IPlaybackManager.PlaybackServiceCallback? = null
     private val mMediaSessionCallback: MediaSessionCallback
     private var notification: INotification? = null
@@ -46,6 +47,14 @@ class PlaybackManager constructor(
 
     override fun setPlayStatusChanged(playStatusChanged: PlayStatusChanged) {
         mPlayStatusChanged = playStatusChanged;
+    }
+
+    override fun isExistLast(): Boolean {
+        return mediaQueue.isExistLast()
+    }
+
+    override fun isExistNext(): Boolean {
+        return mediaQueue.isExistNext()
     }
 
     init {
@@ -225,7 +234,7 @@ class PlaybackManager constructor(
         }
         if (currRepeatMode == PlaybackStateCompat.REPEAT_MODE_NONE) {
             //顺序播放
-            if (shouldPlayNext && mediaQueue.skipQueuePosition(1)) {
+            if (shouldPlayNext && mediaQueue.skipQueueNext(false)) {
                 handlePlayRequest(true)
                 mediaQueue.updateMetadata()
             } else {
@@ -237,12 +246,9 @@ class PlaybackManager constructor(
             handlePlayRequest(true)
         } else if (currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL) {
             //列表循环
-            if (shouldPlayNext && mediaQueue.skipQueuePosition(1)) {
-                handlePlayRequest(true)
-                mediaQueue.updateMetadata()
-            } else {
-                handleStopRequest(null)
-            }
+            mediaQueue.skipQueueNext(true)
+            handlePlayRequest(true)
+            mediaQueue.updateMetadata()
         }
     }
 
@@ -315,21 +321,21 @@ class PlaybackManager constructor(
 
         override fun onSkipToNext() {
             super.onSkipToNext()
-            if (shouldPlayNext) {
-                if (mediaQueue.skipQueuePosition(1)) {
-                    handlePlayRequest(true)
-                    mediaQueue.updateMetadata()
-                }
+            if (mediaQueue.skipQueueNext(currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL)) {
+                handlePlayRequest(true)
+                mediaQueue.updateMetadata()
+            } else {
+                handleStopRequest(null)
             }
         }
 
         override fun onSkipToPrevious() {
             super.onSkipToPrevious()
-            if (shouldPlayPre) {
-                if (mediaQueue.skipQueuePosition(-1)) {
-                    handlePlayRequest(true)
-                    mediaQueue.updateMetadata()
-                }
+            if (mediaQueue.skipQueueLast(currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL)) {
+                handlePlayRequest(true)
+                mediaQueue.updateMetadata()
+            } else {
+                handleStopRequest(null)
             }
         }
 

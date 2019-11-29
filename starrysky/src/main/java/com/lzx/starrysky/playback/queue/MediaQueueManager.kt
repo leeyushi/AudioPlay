@@ -17,7 +17,6 @@ import java.util.Arrays
 open class MediaQueueManager(provider: MediaQueueProvider) : MediaQueueProviderSurface(provider),
         MediaQueue {
 
-
     private var mMediaResource: MediaResource? = null
     private var mCurrentIndex: Int = 0
     private var mUpdateListener: MediaQueueProvider.MetadataUpdateListener? = null
@@ -42,24 +41,43 @@ open class MediaQueueManager(provider: MediaQueueProvider) : MediaQueueProviderS
         return mediaId == current.getMediaId()
     }
 
-    override fun skipQueuePosition(amount: Int): Boolean {
-        val mPlayingQueue = getMediaList()
-        var index = mCurrentIndex + amount
-        if (mPlayingQueue.size == 0 || index >= mPlayingQueue.size || index < 0) {
-            return false
+
+    override fun skipQueueNext(cycle: Boolean): Boolean {
+        var result = true
+        //坐标越界，如果允许循环，自动播放第0个
+        if (!isExistNext()) {
+            if (cycle) {
+                mCurrentIndex = 0
+            } else {
+                result = false
+            }
+        } else {
+            mCurrentIndex++;
         }
-//        if (index < 0) {
-//            index = 0
-//        } else {
-//            index %= mPlayingQueue.size
-//        }
-        index %= mPlayingQueue.size
-        if (!QueueHelper.isIndexPlayable(index, mPlayingQueue)) {
-            return false
+        return result
+    }
+
+    override fun skipQueueLast(cycle: Boolean): Boolean {
+        var result = true
+        //坐标越界，如果允许循环，自动播放最后一个
+        if (!isExistLast()) {
+            if (cycle) {
+                mCurrentIndex = getMediaList().size - 1
+            } else {
+                result = false
+            }
+        } else {
+            mCurrentIndex--;
         }
-        mCurrentIndex = index
-        StarrySkyUtils.log("skipQueuePosition#mCurrentIndex=$mCurrentIndex")
-        return true
+        return result
+    }
+
+    override fun isExistNext(): Boolean {
+        return mCurrentIndex + 1 != getMediaList().size
+    }
+
+    override fun isExistLast(): Boolean {
+        return mCurrentIndex - 1 != -1
     }
 
     override fun getCurrentMusic(): MediaResource? {
