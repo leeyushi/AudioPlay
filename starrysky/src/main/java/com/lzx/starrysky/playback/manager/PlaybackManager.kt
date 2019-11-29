@@ -386,6 +386,7 @@ class PlaybackManager constructor(
 
         override fun onSkipToPrevious() {
             super.onSkipToPrevious()
+            if (setSinglePlay()) return
             if (mediaQueue.skipQueueLast(currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL)) {
                 handlePlayRequest(true)
                 mediaQueue.updateMetadata()
