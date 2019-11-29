@@ -37,6 +37,11 @@ interface IPlaybackManager {
      */
     fun getPlayIndex(): Int
 
+    /**
+     * 设置当前播放的索引
+     */
+    fun setPlayIndex(index: Int)
+
 
     /**
      * 设置当前是否在播放

@@ -57,6 +57,11 @@ interface MediaQueue {
     fun getPlayIndex(): Int
 
     /**
+     * 设置当前播放的索引
+     */
+    fun setPlayIndex(index: Int)
+
+    /**
      * 获取当前播放的媒体
      */
     fun getCurrentMusic(): MediaResource?

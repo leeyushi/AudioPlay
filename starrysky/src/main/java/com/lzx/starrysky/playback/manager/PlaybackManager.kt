@@ -67,6 +67,10 @@ class PlaybackManager constructor(
         return mediaQueue.getPlayIndex()
     }
 
+    override fun setPlayIndex(index: Int) {
+        mediaQueue.setPlayIndex(index)
+    }
+
     override fun setPlaying(isPlay: Boolean) {
         mIsPlayIng = isPlay
     }
