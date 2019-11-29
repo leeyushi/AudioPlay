@@ -305,7 +305,8 @@ class PlaybackManager constructor(
 
 
     override fun onPlaybackStatusChanged(state: Int) {
-        mIsPlayIng = state == PlaybackStateCompat.STATE_PLAYING
+        if (state == PlaybackStateCompat.STATE_PLAYING || state == PlaybackStateCompat.STATE_PLAYING) mIsPlayIng = true
+        if (state == PlaybackStateCompat.STATE_STOPPED || state == PlaybackStateCompat.STATE_PAUSED) mIsPlayIng = false
         mPlayStatusChanged?.onStatusChanged(state)
         updatePlaybackState(false, null)
     }
