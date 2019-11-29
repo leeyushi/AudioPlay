@@ -31,6 +31,8 @@ class PlaybackManager constructor(
     private var stateBuilder: PlaybackStateCompat.Builder? = null
     private val mHandler = Handler(Looper.getMainLooper())
     private var mPlayStatusChanged: PlayStatusChanged? = null;
+    //当前是否正在播放中
+    private var mIsPlayIng = false;
 
     interface PlayStatusChanged {
         /**
@@ -65,6 +67,10 @@ class PlaybackManager constructor(
         return mediaQueue.getPlayIndex()
     }
 
+    override fun setPlaying(isPlay: Boolean) {
+        mIsPlayIng = isPlay
+    }
+
     init {
         mMediaSessionCallback = MediaSessionCallback()
         playback.setCallback(this)
@@ -75,7 +81,7 @@ class PlaybackManager constructor(
         get() = mMediaSessionCallback
 
     override val isPlaying: Boolean
-        get() = playback.isPlaying
+        get() = mIsPlayIng
 
     override fun setServiceCallback(serviceCallback: IPlaybackManager.PlaybackServiceCallback) {
         mServiceCallback = serviceCallback
@@ -293,7 +299,9 @@ class PlaybackManager constructor(
         }
     }
 
+
     override fun onPlaybackStatusChanged(state: Int) {
+        mIsPlayIng = state == PlaybackStateCompat.STATE_PLAYING
         mPlayStatusChanged?.onStatusChanged(state)
         updatePlaybackState(false, null)
     }

@@ -227,6 +227,7 @@ interface PlayerControl {
      */
     fun isPlaying(): Boolean
 
+
     /**
      * 比较方便的判断当前媒体是否暂停中
      */
@@ -270,7 +271,7 @@ interface PlayerControl {
     /**
      * 获取 AudioSessionId
      */
-    fun getAudioSessionId():Int
+    fun getAudioSessionId(): Int
 
     /**
      * 更新通知栏喜欢或收藏按钮UI

@@ -11,10 +11,10 @@ interface IPlaybackManager {
 
     val mediaSessionCallback: MediaSessionCompat.Callback
 
-    /**
-     * 是否在播放
-     */
-    val isPlaying: Boolean
+//    /**
+//     * 是否在播放
+//     */
+//    val isPlaying: Boolean
 
     fun setServiceCallback(serviceCallback: PlaybackServiceCallback)
 
@@ -36,6 +36,17 @@ interface IPlaybackManager {
      * 获取当前播放的索引
      */
     fun getPlayIndex(): Int
+
+
+    /**
+     * 设置当前是否在播放
+     */
+    fun setPlaying(isPlay: Boolean)
+
+    /**
+     * 获取当前是否在播放
+     */
+    val isPlaying: Boolean
 
     /**
      * 播放
@@ -82,8 +93,8 @@ interface IPlaybackManager {
         fun onPlaybackStop()
 
         fun onPlaybackStateUpdated(
-            newState: PlaybackStateCompat, currMetadata:
-            MediaMetadataCompat?
+                newState: PlaybackStateCompat, currMetadata:
+                MediaMetadataCompat?
         )
 
         fun onShuffleModeUpdated(shuffleMode: Int)

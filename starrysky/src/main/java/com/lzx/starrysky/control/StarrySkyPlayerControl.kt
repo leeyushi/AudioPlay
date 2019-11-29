@@ -350,9 +350,9 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
     override fun querySongInfoInLocal(): List<SongInfo> {
         val songInfos = mutableListOf<SongInfo>()
         val cursor =
-            context.contentResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null,
-                null, null, null)
-                ?: return songInfos
+                context.contentResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null,
+                        null, null, null)
+                        ?: return songInfos
 
         while (cursor.moveToNext()) {
             val song = SongInfo()
@@ -391,7 +391,7 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
         val projection = arrayOf(MediaStore.Audio.Albums.ALBUM_ART)
         var imagePath: String? = null
         val uri = Uri.parse(
-            "content://media" + MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI.path + "/" + albumId)
+                "content://media" + MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI.path + "/" + albumId)
         val cur = context.contentResolver.query(uri, projection, null, null, null) ?: return null
         if (cur.count > 0 && cur.columnCount > 0) {
             cur.moveToNext()
