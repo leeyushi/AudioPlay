@@ -387,6 +387,7 @@ class PlaybackManager constructor(
             if (setSinglePlay()) return
             if (mediaQueue.skipQueueNext(currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL)) {
                 mPlayStatusChanged?.onPlayDone()
+                mPlayStatusChanged?.onNewPlay()
                 handlePlayRequest(true)
                 mediaQueue.updateMetadata()
             } else {
@@ -400,6 +401,7 @@ class PlaybackManager constructor(
             if (setSinglePlay()) return
             if (mediaQueue.skipQueueLast(currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL)) {
                 mPlayStatusChanged?.onPlayDone()
+                mPlayStatusChanged?.onNewPlay()
                 handlePlayRequest(true)
                 mediaQueue.updateMetadata()
             } else {
