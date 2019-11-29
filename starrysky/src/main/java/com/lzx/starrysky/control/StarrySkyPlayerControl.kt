@@ -105,7 +105,6 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
 
     override fun playMusic() {
         StarrySky.get().getPlaybackManager().setPlaying(true)
-        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
         connection.getTransportControls()?.play()
     }
 

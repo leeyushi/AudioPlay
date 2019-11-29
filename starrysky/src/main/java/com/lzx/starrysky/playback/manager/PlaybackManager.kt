@@ -385,8 +385,8 @@ class PlaybackManager constructor(
         override fun onSkipToNext() {
             super.onSkipToNext()
             if (setSinglePlay()) return
+            mPlayStatusChanged?.onPlayDone()
             if (mediaQueue.skipQueueNext(currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL)) {
-                mPlayStatusChanged?.onPlayDone()
                 mPlayStatusChanged?.onNewPlay()
                 handlePlayRequest(true)
                 mediaQueue.updateMetadata()
@@ -399,8 +399,8 @@ class PlaybackManager constructor(
         override fun onSkipToPrevious() {
             super.onSkipToPrevious()
             if (setSinglePlay()) return
+            mPlayStatusChanged?.onPlayDone()
             if (mediaQueue.skipQueueLast(currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL)) {
-                mPlayStatusChanged?.onPlayDone()
                 mPlayStatusChanged?.onNewPlay()
                 handlePlayRequest(true)
                 mediaQueue.updateMetadata()
