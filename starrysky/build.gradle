@@ -67,7 +67,7 @@ dependencies {
 //    api 'com.ycjiang:VideoPlayModule-Lite:2.3.52'
 
 //    implementation('com.ycjiang:VideoPlayModule-Lite:2.3.52', {
-//        exclude group: 'com.google.android.exoplayer', module: 'exoplayer-ui:2.10.8'
+//        exclude group: 'com.google.android.exoplayer', module: 'exoplayer-core'
 //    })
 }
 repositories {

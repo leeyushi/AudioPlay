@@ -32,7 +32,7 @@ class PlaybackManager constructor(
     private val mHandler = Handler(Looper.getMainLooper())
     private var mPlayStatusChanged: PlayStatusChanged? = null;
 
-    public interface PlayStatusChanged {
+    interface PlayStatusChanged {
         /**
          * 状态回调
          */
@@ -235,12 +235,16 @@ class PlaybackManager constructor(
     override fun onCompletion() {
         mPlayStatusChanged?.onPlayDone();
         updatePlaybackState(false, null)
-        //单曲模式(播放当前就结束)
-        if (currRepeatMode == SINGLE_MODE_ONE) {
-            playback.currentMediaId = ""
-            mPlayStatusChanged?.onPlayEnd()
-            return
-        }
+        setSinglePlay()
+        setSequencePlay()
+        setSingleCyclePlay()
+        setListLoopPlay()
+    }
+
+    /**
+     * 设置顺序播放的状态
+     */
+    fun setSequencePlay() {
         if (currRepeatMode == PlaybackStateCompat.REPEAT_MODE_NONE) {
             //顺序播放
             if (shouldPlayNext && mediaQueue.skipQueueNext(false)) {
@@ -250,11 +254,38 @@ class PlaybackManager constructor(
                 handleStopRequest(null)
                 mPlayStatusChanged?.onPlayEnd()
             }
-        } else if (currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ONE) {
+        }
+    }
+
+    /**
+     * 设置单曲播放的状态
+     */
+    fun setSinglePlay(): Boolean {
+        //单曲模式(播放当前就结束)
+        if (currRepeatMode == SINGLE_MODE_ONE) {
+            playback.currentMediaId = ""
+            mPlayStatusChanged?.onPlayEnd()
+            return true
+        }
+        return false
+    }
+
+    /**
+     * 设置单曲循环播放的状态
+     */
+    fun setSingleCyclePlay() {
+        if (currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ONE) {
             //单曲循环
             playback.currentMediaId = ""
             handlePlayRequest(true)
-        } else if (currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL) {
+        }
+    }
+
+    /**
+     * 设置列表循环播放的状态
+     */
+    fun setListLoopPlay() {
+        if (currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL) {
             //列表循环
             mediaQueue.skipQueueNext(true)
             handlePlayRequest(true)
@@ -331,6 +362,7 @@ class PlaybackManager constructor(
 
         override fun onSkipToNext() {
             super.onSkipToNext()
+            if (setSinglePlay()) return
             if (mediaQueue.skipQueueNext(currRepeatMode == PlaybackStateCompat.REPEAT_MODE_ALL)) {
                 handlePlayRequest(true)
                 mediaQueue.updateMetadata()

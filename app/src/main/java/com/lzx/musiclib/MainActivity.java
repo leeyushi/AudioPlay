@@ -25,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn3).setOnClickListener(v -> startPlayDetailActivity());
         StarrySky.get().getPlaybackManager().setPlayStatusChanged(new PlaybackManager.PlayStatusChanged() {
             @Override
+            public void onPlayEnd() {
+
+            }
+
+            @Override
             public void onStatusChanged(int state) {
 
             }
