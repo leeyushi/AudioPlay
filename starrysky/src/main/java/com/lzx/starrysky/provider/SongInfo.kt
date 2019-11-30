@@ -18,6 +18,7 @@ open class SongInfo(
         var songRectCover: String = "",  //专辑封面(矩形)
         var songRoundCover: String = "",  //专辑封面(圆形)
         var songNameKey: String = "",
+        var tryTime: Int = 0,       //试听时长
         var songCoverBitmap: Bitmap? = null,
         var songUrl: String = "",  //音乐播放地址
         var genre: String = "",  //类型（流派）
