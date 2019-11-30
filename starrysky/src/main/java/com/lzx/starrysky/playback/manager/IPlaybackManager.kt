@@ -51,6 +51,28 @@ interface IPlaybackManager {
     fun setPlaying(isPlay: Boolean)
 
     /**
+     * 设置当前是否暂停
+     */
+    fun setPause(isPause: Boolean)
+
+
+    /**
+     * 设置当前是否停止
+     */
+    fun setStop(isPause: Boolean)
+
+
+    /**
+     * 获取当前是否在暂停
+     */
+    val isPause: Boolean
+
+    /**
+     * 获取当前是否停止播放
+     */
+    val isStop: Boolean
+
+    /**
      * 获取当前是否在播放
      */
     val isPlaying: Boolean

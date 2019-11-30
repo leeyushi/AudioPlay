@@ -85,31 +85,31 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
     }
 
     override fun playMusic(songInfos: List<SongInfo>, index: Int) {
-        StarrySky.get().getPlaybackManager().setPlaying(true)
+        setPlayStatus(true,false,false)
         StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
         mMediaQueueProvider.updateMediaListBySongInfo(songInfos)
         playMusicByIndex(index)
     }
 
     private fun playMusicImpl(mediaId: String) {
-        StarrySky.get().getPlaybackManager().setPlaying(true)
+        setPlayStatus(true,false,false)
         StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
         StarrySky.get().getPlaybackManager().setPlayIndex(mMediaQueueProvider.getIndexByMediaId(mediaId))
         connection.getTransportControls()?.playFromMediaId(mediaId, null)
     }
 
     override fun pauseMusic() {
-        StarrySky.get().getPlaybackManager().setPlaying(false)
+        setPlayStatus(false,true,false)
         connection.getTransportControls()?.pause()
     }
 
     override fun playMusic() {
-        StarrySky.get().getPlaybackManager().setPlaying(true)
+        setPlayStatus(true,false,false)
         connection.getTransportControls()?.play()
     }
 
     override fun stopMusic() {
-        StarrySky.get().getPlaybackManager().setPlaying(false)
+        setPlayStatus(false,false,true)
         connection.getTransportControls()?.stop()
     }
 
@@ -124,13 +124,19 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
     }
 
     override fun skipToNext() {
-        StarrySky.get().getPlaybackManager().setPlaying(true)
+        setPlayStatus(true,false,false)
         connection.getTransportControls()?.skipToNext()
     }
 
     override fun skipToPrevious() {
-        StarrySky.get().getPlaybackManager().setPlaying(true)
+        setPlayStatus(true,false,false)
         connection.getTransportControls()?.skipToPrevious()
+    }
+
+    fun setPlayStatus(isPlayIng: Boolean, isPause: Boolean, isStop: Boolean) {
+        StarrySky.get().getPlaybackManager().setPlaying(isPlayIng)
+        StarrySky.get().getPlaybackManager().setPause(isPause)
+        StarrySky.get().getPlaybackManager().setStop(isStop)
     }
 
     override fun fastForward() {
