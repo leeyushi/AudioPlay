@@ -86,16 +86,16 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
 
     override fun playMusic(songInfos: List<SongInfo>, index: Int) {
         setPlayStatus(true,false,false)
-        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
-        mMediaQueueProvider.updateMediaListBySongInfo(songInfos)
         playMusicByIndex(index)
+        mMediaQueueProvider.updateMediaListBySongInfo(songInfos)
+        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
     }
 
     private fun playMusicImpl(mediaId: String) {
         setPlayStatus(true,false,false)
-        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
         StarrySky.get().getPlaybackManager().setPlayIndex(mMediaQueueProvider.getIndexByMediaId(mediaId))
         connection.getTransportControls()?.playFromMediaId(mediaId, null)
+        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
     }
 
     override fun pauseMusic() {
