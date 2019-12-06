@@ -103,10 +103,11 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
         connection.getTransportControls()?.pause()
     }
 
-    override fun playMusic() {
+    override fun resumeMusic() {
         setPlayStatus(true,false,false)
         connection.getTransportControls()?.play()
     }
+
 
     override fun stopMusic() {
         setPlayStatus(false,false,true)

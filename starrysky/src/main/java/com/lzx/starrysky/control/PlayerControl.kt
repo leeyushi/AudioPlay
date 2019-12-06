@@ -42,7 +42,7 @@ interface PlayerControl {
     /**
      * 恢复播放
      */
-    fun playMusic()
+    fun resumeMusic()
 
     /**
      * 停止播放
