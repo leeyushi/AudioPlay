@@ -160,6 +160,7 @@ class PlaybackManager constructor(
                 mServiceCallback?.onPlaybackStart()
             }
             playback.play(currentMusic, isPlayWhenReady)
+
         }
     }
 
@@ -277,6 +278,7 @@ class PlaybackManager constructor(
         setSequencePlay()
         setSingleCyclePlay()
         setListLoopPlay()
+        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
     }
 
     /**
