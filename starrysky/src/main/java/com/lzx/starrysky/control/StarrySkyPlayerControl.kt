@@ -88,7 +88,6 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
         setPlayStatus(true, false, false)
         playMusicByIndex(index)
         mMediaQueueProvider.updateMediaListBySongInfo(songInfos)
-        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onNewPlay()
     }
 
     private fun playMusicImpl(mediaId: String) {
