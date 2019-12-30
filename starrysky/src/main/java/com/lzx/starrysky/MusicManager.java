@@ -102,8 +102,8 @@ public class MusicManager {
     /**
      * 恢复播放
      */
-    public void playMusic() {
-        StarrySky.with().playMusic();
+    public void resumeMusic() {
+        StarrySky.with().resumeMusic();
     }
 
     /**
