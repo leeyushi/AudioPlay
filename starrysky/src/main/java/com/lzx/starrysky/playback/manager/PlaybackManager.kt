@@ -59,6 +59,21 @@ class PlaybackManager constructor(
          * 开始新的播放
          */
         fun onNewPlay()
+
+        /**
+         * 暂停播放
+         */
+        fun onPausePlay()
+
+        /**
+         * 恢复播放
+         */
+        fun onResumePlay()
+
+        /**
+         * 停止播放
+         */
+        fun onStopPlay()
     }
 
     override fun setPlayStatusChanged(playStatusChanged: PlayStatusChanged) {

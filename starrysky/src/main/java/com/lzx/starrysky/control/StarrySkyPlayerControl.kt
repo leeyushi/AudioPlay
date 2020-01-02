@@ -100,17 +100,20 @@ class StarrySkyPlayerControl constructor(private val context: Context) : PlayerC
     override fun pauseMusic() {
         setPlayStatus(false, true, false)
         connection.getTransportControls()?.pause()
+        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onPausePlay()
     }
 
     override fun resumeMusic() {
         setPlayStatus(true, false, false)
         connection.getTransportControls()?.play()
+        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onResumePlay()
     }
 
 
     override fun stopMusic() {
         setPlayStatus(false, false, true)
         connection.getTransportControls()?.stop()
+        StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onStopPlay()
         StarrySky.get().getPlaybackManager().getPlayStatusChanged()?.onStatusChanged(PlaybackStateCompat.STATE_STOPPED)
     }
 
