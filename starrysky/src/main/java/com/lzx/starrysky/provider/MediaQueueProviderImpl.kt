@@ -5,6 +5,7 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.text.TextUtils
 import com.lzx.starrysky.BaseMediaInfo
+import com.lzx.starrysky.StarrySky
 import com.lzx.starrysky.ext.album
 import com.lzx.starrysky.ext.albumArtUri
 import com.lzx.starrysky.ext.artist
@@ -34,8 +35,8 @@ open class MediaQueueProviderImpl : MediaQueueProvider {
             val mediaItems = mutableListOf<MediaBrowserCompat.MediaItem>()
             for (metadata in mediaMetadataCompatList) {
                 val mediaItem = MediaBrowserCompat.MediaItem(
-                    metadata.description,
-                    MediaBrowserCompat.MediaItem.FLAG_PLAYABLE)
+                        metadata.description,
+                        MediaBrowserCompat.MediaItem.FLAG_PLAYABLE)
                 mediaItems.add(mediaItem)
             }
             return mediaItems
@@ -178,12 +179,12 @@ open class MediaQueueProviderImpl : MediaQueueProvider {
     }
 
     override fun updateMusicArt(
-        songId: String, changeData: MediaMetadataCompat, albumArt: Bitmap, icon: Bitmap
+            songId: String, changeData: MediaMetadataCompat, albumArt: Bitmap, icon: Bitmap
     ) {
         val metadata = MediaMetadataCompat.Builder(changeData)
-            .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, albumArt)
-            .putBitmap(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, icon)
-            .build()
+                .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, albumArt)
+                .putBitmap(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, icon)
+                .build()
         mMediaMetadataCompatMap[songId] = metadata
     }
 
@@ -192,7 +193,7 @@ open class MediaQueueProviderImpl : MediaQueueProvider {
     </SongInfo> */
     @Synchronized
     private fun toMediaMetadata(
-        songInfos: List<SongInfo>
+            songInfos: List<SongInfo>
     ): LinkedHashMap<String, MediaMetadataCompat> {
         val map = linkedMapOf<String, MediaMetadataCompat>()
         for (info in songInfos) {

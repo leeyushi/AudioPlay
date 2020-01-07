@@ -73,7 +73,7 @@ open class MediaQueueManager(provider: MediaQueueProvider) : MediaQueueProviderS
     }
 
     override fun isExistNext(): Boolean {
-        return mCurrentIndex + 1 != getMediaList().size
+        return mCurrentIndex + 1 != getMediaList().size && getMediaList().size > 0
     }
 
     override fun isExistLast(): Boolean {
